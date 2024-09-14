@@ -8,8 +8,8 @@ extents = Vector2( 14, 14 )
 
 [node name="player" type="KinematicBody2D"]
 position = Vector2( 50, 37 )
-collision_layer = 2
-collision_mask = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -30,3 +30,16 @@ one_shot = true
 [node name="slow" type="Timer" parent="timers/shoot"]
 wait_time = 0.8
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 0.86
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 86.42
+angular_velocity = 195.56
+damping = 61.73
+scale_amount = 13.35

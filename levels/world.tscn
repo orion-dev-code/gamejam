@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/smg.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/AWM.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player (1).png" type="Texture" id=4]
-[ext_resource path="res://enem/tnt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://player/health bar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://levels/world.gd" type="Script" id=7]
+[ext_resource path="res://player/increase-health.tscn" type="PackedScene" id=8]
+[ext_resource path="res://04B_30__.TTF" type="DynamicFontData" id=9]
 
 [sub_resource type="NavigationPolygon" id=5]
 vertices = PoolVector2Array( 64, 32, 32, 32, 32, 0, 64, 0 )
@@ -159,8 +162,31 @@ points = PoolVector2Array( 96, 128, 0, 128, 0, 0, 96, 0 )
 } ]
 4/z_index = 0
 
+[sub_resource type="DynamicFont" id=12]
+size = 150
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 30
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 30
+font_data = ExtResource( 9 )
+
+[sub_resource type="Environment" id=15]
+background_mode = 4
+glow_enabled = true
+glow_strength = 1.15
+glow_blend_mode = 1
+glow_hdr_threshold = 0.01
+glow_hdr_luminance_cap = 0.1
+glow_hdr_scale = 4.0
+glow_bicubic_upscale = true
+
 [node name="world" type="Node2D"]
 position = Vector2( 1, 0 )
+script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1025.0
@@ -174,21 +200,94 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 3
 collision_mask = 3
 format = 1
-tile_data = PoolIntArray( 131078, 536870915, 0, 131097, 536870915, 0, 196614, 536870915, 0, 196633, 536870915, 0, 262150, 536870915, 0, 262169, 536870915, 0, 327683, 536870915, 0, 327684, 536870915, 0, 327685, 536870915, 0, 327686, 536870915, 0, 327705, 536870915, 0, 327706, 536870915, 0, 327707, 536870915, 0, 327708, 536870915, 0, 589839, 3, 0, 589840, 3, 0, 589841, 3, 0, 655375, 3, 0, 655376, 3, 0, 655377, 3, 0, 851971, 536870915, 0, 851972, 536870915, 0, 851973, 536870915, 0, 851974, 536870915, 0, 851993, 536870915, 0, 851994, 536870915, 0, 851995, 536870915, 0, 851996, 536870915, 0, 917510, 536870915, 0, 917529, 536870915, 0, 983046, 536870915, 0, 983065, 536870915, 0, 1048582, 536870915, 0, 1048601, 536870915, 0 )
+tile_data = PoolIntArray( 65535, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 15, 3, 0, 16, 3, 0, 17, 3, 0, 18, 3, 0, 19, 3, 0, 20, 3, 0, 21, 3, 0, 22, 3, 0, 23, 3, 0, 24, 3, 0, 25, 3, 0, 26, 3, 0, 27, 3, 0, 28, 3, 0, 29, 3, 0, 30, 3, 0, 31, 3, 0, 131071, 3, 0, 65536, 3, 0, 65567, 3, 0, 196607, 3, 0, 131072, 3, 0, 131103, 3, 0, 262143, 3, 0, 196608, 3, 0, 196611, 3, 0, 196612, 3, 0, 196613, 3, 0, 196614, 3, 0, 196633, 3, 0, 196634, 3, 0, 196635, 3, 0, 196636, 3, 0, 196639, 3, 0, 327679, 3, 0, 262144, 3, 0, 262147, 3, 0, 262172, 3, 0, 262175, 3, 0, 393215, 3, 0, 327680, 3, 0, 327683, 3, 0, 327708, 3, 0, 327711, 3, 0, 458751, 3, 0, 393216, 3, 0, 393219, 3, 0, 393244, 3, 0, 393247, 3, 0, 524287, 3, 0, 458752, 3, 0, 458783, 3, 0, 589823, 3, 0, 524288, 3, 0, 524319, 3, 0, 655359, 3, 0, 589824, 3, 0, 589855, 3, 0, 720895, 3, 0, 655360, 3, 0, 655391, 3, 0, 786431, 3, 0, 720896, 3, 0, 720927, 3, 0, 851967, 3, 0, 786432, 3, 0, 786435, 3, 0, 786460, 3, 0, 786463, 3, 0, 917503, 3, 0, 851968, 3, 0, 851971, 3, 0, 851996, 3, 0, 851999, 3, 0, 983039, 3, 0, 917504, 3, 0, 917507, 3, 0, 917532, 3, 0, 917535, 3, 0, 1048575, 3, 0, 983040, 3, 0, 983043, 3, 0, 983044, 3, 0, 983045, 3, 0, 983046, 3, 0, 983065, 3, 0, 983066, 3, 0, 983067, 3, 0, 983068, 3, 0, 983071, 3, 0, 1114111, 3, 0, 1048576, 3, 0, 1048607, 3, 0, 1179647, 3, 0, 1114112, 3, 0, 1114143, 3, 0, 1245183, 3, 0, 1179648, 3, 0, 1179649, 3, 0, 1179650, 3, 0, 1179651, 3, 0, 1179652, 3, 0, 1179653, 3, 0, 1179654, 3, 0, 1179655, 3, 0, 1179656, 3, 0, 1179657, 3, 0, 1179658, 3, 0, 1179659, 3, 0, 1179660, 3, 0, 1179661, 3, 0, 1179662, 3, 0, 1179663, 3, 0, 1179664, 3, 0, 1179665, 3, 0, 1179666, 3, 0, 1179667, 3, 0, 1179668, 3, 0, 1179669, 3, 0, 1179670, 3, 0, 1179671, 3, 0, 1179672, 3, 0, 1179673, 3, 0, 1179674, 3, 0, 1179675, 3, 0, 1179676, 3, 0, 1179677, 3, 0, 1179678, 3, 0, 1179679, 3, 0 )
 
 [node name="smg" parent="." instance=ExtResource( 2 )]
-position = Vector2( 276, 119 )
+position = Vector2( 276, 121 )
+
+[node name="smg2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 276, 494 )
 
 [node name="player" parent="." groups=["player"] instance=ExtResource( 1 )]
 position = Vector2( 126, 60 )
 
 [node name="AWM" parent="." instance=ExtResource( 3 )]
-position = Vector2( 551, 120 )
+position = Vector2( 723, 121 )
 
-[node name="tnt" parent="." instance=ExtResource( 6 )]
-position = Vector2( 430, 238 )
-collision_layer = 3
-collision_mask = 3
+[node name="AWM2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 723, 494 )
 
-[node name="tnt2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 770, 379 )
+[node name="health bar" parent="." instance=ExtResource( 6 )]
+margin_left = 253.0
+margin_top = 557.0
+margin_right = 253.0
+margin_bottom = 557.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="increase-health" parent="." instance=ExtResource( 8 )]
+position = Vector2( 783, 191 )
+
+[node name="Timer2" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.0823529 )
+margin_left = 378.0
+margin_top = 247.0
+margin_right = 631.0
+margin_bottom = 517.0
+custom_fonts/font = SubResource( 12 )
+text = "0"
+
+[node name="enembullet" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Position2D8" type="Position2D" parent="."]
+position = Vector2( 952, 310 )
+
+[node name="TNT" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="enemdie" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.223529 )
+position = Vector2( 85, 3 )
+
+[node name="Sprite" type="Sprite" parent="enemdie"]
+modulate = Color( 1, 0.309804, 0, 1 )
+position = Vector2( 332, 76 )
+scale = Vector2( 0.384615, 0.279412 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="enemdie"]
+margin_left = 358.0
+margin_top = 61.0
+margin_right = 398.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 13 )
+text = "0"
+
+[node name="Sprite2" type="Sprite" parent="enemdie"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 445, 76 )
+scale = Vector2( 0.385, 0.279 )
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="enemdie"]
+margin_left = 474.0
+margin_top = 61.0
+margin_right = 514.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 14 )
+text = "0"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 15 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 64, 311 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="timeout" from="enembullet" to="." method="_on_enembullet_timeout"]
+[connection signal="timeout" from="TNT" to="." method="_on_TNT_timeout"]

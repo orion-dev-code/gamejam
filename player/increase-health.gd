@@ -1,24 +1,25 @@
-extends Node
+extends Area2D
 
-var timer = 0
-var health = 100
-var smg_shoot = false
-var awm_shoot = false
-var bullet_speed = 2000
-var pla_pos = Vector2()
-var ro = 0
-var enemdie = 0
-var tntdie = 0
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _physics_process(delta):
+	if Globale.health<= 0:
+		queue_free()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_increasehealth_body_entered(body):
+	if body.is_in_group("player"):
+		Globale.health += 20
+		queue_free()
+	pass # Replace with function body.

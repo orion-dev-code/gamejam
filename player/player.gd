@@ -7,13 +7,30 @@ var motion = Vector2()
 
 
 func _physics_process(delta):
+	Globale.ro = rotation_degrees
+	Globale.pla_pos = global_position
+	if motion!=Vector2(0,0) and Globale.health>0:
+		var shadow = preload("res://player/shodow.tscn").instance()
+		shadow.global_position = global_position
+		shadow.rotation_degrees = rotation_degrees
+		get_parent().add_child(shadow)
 	if Globale.smg_shoot == true:
-		$Sprite.modulate = Color(0, 40, 255, 255)
+		Globale.awm_shoot == false
+		$Sprite.modulate = Color(0, 40, 255, 50)
+		
 	if Globale.awm_shoot == true:
-		$Sprite.modulate = Color(255, 235, 0, 255)
+		Globale.smg_shoot == false
+		$Sprite.modulate = Color(255, 235, 0, 50)
+	if Globale.health<=0:
+		$Sprite.hide()
+		$CPUParticles2D.emitting = true
+		yield(get_tree().create_timer(1),"timeout")
+		get_tree().reload_current_scene()
+		return
 	move()
 	shoot_smg()
 	shoot_AWM()
+	
 
 	pass
 
