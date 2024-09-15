@@ -12,7 +12,7 @@ func _ready():
 
 
 func _on_Area2D_body_entered(body):
-	if body !=player && body!=self:
+	if body !=player && body!=self && !body.is_in_group("shadow"):
 
 		queue_free()
 	pass # Replace with function body.

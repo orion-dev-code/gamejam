@@ -1,0 +1,203 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://04B_30__.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://levels/main-menu.gd" type="Script" id=2]
+[ext_resource path="res://stopwatch.png" type="Texture" id=3]
+[ext_resource path="res://Player (1).png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=5]
+size = 90
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 70
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1229, -107 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -1250, -107 ), Vector2( -104, -107 ), Vector2( -1250, -107 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="main-menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = -21.0
+margin_top = -25.0
+margin_right = 1057.0
+margin_bottom = 638.0
+color = Color( 0.215686, 0.552941, 0.301961, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 162.0
+margin_top = 98.0
+margin_right = 855.0
+margin_bottom = 189.0
+custom_fonts/font = SubResource( 5 )
+text = "Cube Game"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -71.0
+margin_top = -49.0
+margin_right = 71.0
+margin_bottom = 49.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 142.0
+margin_bottom = 98.0
+
+[node name="play" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_right = 142.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 1, 0.968627, 0, 1 )
+custom_colors/font_color_hover = Color( 0.980392, 1, 0.447059, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.803922, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "play"
+flat = true
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 51.0
+margin_right = 142.0
+margin_bottom = 98.0
+custom_colors/font_color = Color( 1, 0.968627, 0, 1 )
+custom_colors/font_color_hover = Color( 0.980392, 1, 0.447059, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.803922, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Quit"
+flat = true
+
+[node name="high" type="Node2D" parent="."]
+
+[node name="Label4" type="Label" parent="high"]
+margin_left = 60.0
+margin_top = 415.0
+margin_right = 474.0
+margin_bottom = 466.0
+custom_fonts/font = SubResource( 7 )
+text = "high score:"
+
+[node name="Sprite" type="Sprite" parent="high"]
+modulate = Color( 1, 0.470588, 0, 1 )
+position = Vector2( 116, 544.5 )
+scale = Vector2( 0.846154, 0.610294 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="high"]
+margin_left = 175.0
+margin_top = 513.0
+margin_right = 241.0
+margin_bottom = 584.0
+custom_fonts/font = SubResource( 6 )
+text = "0"
+
+[node name="Sprite2" type="Sprite" parent="high"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 390, 545 )
+scale = Vector2( 0.846154, 0.610294 )
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="high"]
+margin_left = 449.0
+margin_top = 513.0
+margin_right = 515.0
+margin_bottom = 584.0
+custom_fonts/font = SubResource( 6 )
+text = "0"
+
+[node name="Sprite3" type="Sprite" parent="high"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 640.18, 542.412 )
+scale = Vector2( 0.190703, 0.189797 )
+texture = ExtResource( 3 )
+
+[node name="Label3" type="Label" parent="high"]
+margin_left = 704.0
+margin_top = 512.5
+margin_right = 770.0
+margin_bottom = 583.5
+custom_fonts/font = SubResource( 6 )
+text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/transition = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -1229.0
+margin_top = -107.0
+margin_right = -24.0
+margin_bottom = 730.0
+color = Color( 0, 0, 0, 1 )
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

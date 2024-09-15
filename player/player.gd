@@ -24,6 +24,7 @@ func _physics_process(delta):
 	if Globale.health<=0:
 		$Sprite.hide()
 		$CPUParticles2D.emitting = true
+		
 		yield(get_tree().create_timer(1),"timeout")
 		get_tree().reload_current_scene()
 		return

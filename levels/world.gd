@@ -8,6 +8,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$"pause-menu".hide()
+	Globale.timer = 0
 	$TNT.start()
 	$enembullet.start()
 	$Timer.start()
@@ -20,7 +22,12 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	
+	if Globale.pause_menu==true:
+		Engine.time_scale = 0
+		$"pause-menu".show()
+	if Globale.pause_menu == false:
+		$"pause-menu".hide()
+		Engine.time_scale = 1
 	$Label.text =str(Globale.timer)
 	$enemdie/Label.text = str(Globale.enemdie)
 	$enemdie/Label2.text = str(Globale.tntdie)
@@ -58,4 +65,9 @@ func _on_TNT_timeout():
 	var enem1 = preload("res://enem/tnt.tscn").instance()
 	enem1.global_position = $Position2D8.global_position
 	get_parent().add_child(enem1)
+	pass # Replace with function body.
+
+
+func _on_Button_pressed():
+	Globale.pause_menu = true
 	pass # Replace with function body.

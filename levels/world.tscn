@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/smg.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/AWM.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player (1).png" type="Texture" id=4]
+[ext_resource path="res://pause.png" type="Texture" id=5]
 [ext_resource path="res://player/health bar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://levels/world.gd" type="Script" id=7]
 [ext_resource path="res://player/increase-health.tscn" type="PackedScene" id=8]
 [ext_resource path="res://04B_30__.TTF" type="DynamicFontData" id=9]
+[ext_resource path="res://levels/pause-menu.gd" type="Script" id=10]
 
 [sub_resource type="NavigationPolygon" id=5]
 vertices = PoolVector2Array( 64, 32, 32, 32, 32, 0, 64, 0 )
@@ -177,12 +179,75 @@ font_data = ExtResource( 9 )
 [sub_resource type="Environment" id=15]
 background_mode = 4
 glow_enabled = true
-glow_strength = 1.15
+glow_strength = 1.09
 glow_blend_mode = 1
 glow_hdr_threshold = 0.01
 glow_hdr_luminance_cap = 0.1
 glow_hdr_scale = 4.0
 glow_bicubic_upscale = true
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect2:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -56, -49 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect2:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -56, -49 ), Vector2( -1200, -49 ) ]
+}
+
+[sub_resource type="DynamicFont" id=18]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 35
+font_data = ExtResource( 9 )
 
 [node name="world" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -224,7 +289,7 @@ margin_right = 253.0
 margin_bottom = 557.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 
 [node name="increase-health" parent="." instance=ExtResource( 8 )]
 position = Vector2( 783, 191 )
@@ -241,13 +306,13 @@ custom_fonts/font = SubResource( 12 )
 text = "0"
 
 [node name="enembullet" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 6.0
 
 [node name="Position2D8" type="Position2D" parent="."]
 position = Vector2( 952, 310 )
 
 [node name="TNT" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 12.0
 
 [node name="enemdie" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.223529 )
@@ -287,7 +352,89 @@ environment = SubResource( 15 )
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 64, 311 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "enter"
+anims/RESET = SubResource( 16 )
+anims/enter = SubResource( 17 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 954.0
+margin_top = 7.0
+margin_right = 1478.0
+margin_bottom = 525.0
+rect_scale = Vector2( 0.112, 0.112 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 524.0
+margin_bottom = 518.0
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_right = 524.0
+margin_bottom = 518.0
+icon = ExtResource( 5 )
+flat = true
+
+[node name="pause-menu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+margin_bottom = -4.0
+script = ExtResource( 10 )
+
+[node name="ColorRect" type="ColorRect" parent="pause-menu"]
+modulate = Color( 1, 1, 1, 0.188235 )
+margin_left = -26.0
+margin_top = -34.0
+margin_right = 1049.0
+margin_bottom = 637.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="pause-menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 375.0
+margin_top = 247.0
+margin_right = 592.0
+margin_bottom = 340.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause-menu/MarginContainer"]
+margin_right = 217.0
+margin_bottom = 93.0
+
+[node name="resume" type="Button" parent="pause-menu/MarginContainer/VBoxContainer"]
+margin_right = 217.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 1, 0.968627, 0, 1 )
+custom_colors/font_color_hover = Color( 0.980392, 1, 0.447059, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.803922, 0, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "Resume"
+flat = true
+
+[node name="back" type="Button" parent="pause-menu/MarginContainer/VBoxContainer"]
+margin_top = 51.0
+margin_right = 217.0
+margin_bottom = 93.0
+custom_colors/font_color = Color( 1, 0.968627, 0, 1 )
+custom_colors/font_color_hover = Color( 0.980392, 1, 0.447059, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.803922, 0, 1 )
+custom_fonts/font = SubResource( 19 )
+text = "Back"
+flat = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = -56.0
+margin_top = -49.0
+margin_right = 1077.0
+margin_bottom = 667.0
+color = Color( 0, 0, 0, 1 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
 [connection signal="timeout" from="enembullet" to="." method="_on_enembullet_timeout"]
 [connection signal="timeout" from="TNT" to="." method="_on_TNT_timeout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="pause-menu/MarginContainer/VBoxContainer/resume" to="pause-menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="pause-menu/MarginContainer/VBoxContainer/back" to="pause-menu" method="_on_back_pressed"]

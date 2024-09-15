@@ -1,15 +1,6 @@
-extends Node
+extends Control
 
-var timer = 0
-var health = 100
-var smg_shoot = false
-var awm_shoot = false
-var bullet_speed = 2000
-var pla_pos = Vector2()
-var ro = 0
-var enemdie = 0
-var tntdie = 0
-var pause_menu = false
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -23,3 +14,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_resume_pressed():
+	Globale.pause_menu = false
+	pass # Replace with function body.
+
+
+func _on_back_pressed():
+	Globale.pause_menu =false
+	get_tree().change_scene("res://levels/main-menu.tscn")
+	pass # Replace with function body.
